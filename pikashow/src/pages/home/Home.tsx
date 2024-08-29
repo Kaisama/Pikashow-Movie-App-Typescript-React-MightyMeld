@@ -1,14 +1,28 @@
-import React, { SetStateAction, useState } from "react";
+import React, { SetStateAction, useContext, useState } from "react";
 import Layouts from "../../Layouts/Layouts";
 import { Box, Paper, InputBase, InputAdornment, Typography } from "@mui/material";
 import SearchIcon from '../../assets/icons/icon-search.svg';
 import MovieTrendingList from "../../components/Movie-trending/MovieTrendingList";
 import MovieList from "../../components/Movie-list/MovieList";
+import { MovieDataType } from "../../assets/data";
+import { MovieContext } from "../../context/movie-context";
+import { log } from "console";
+import Movies from "../movies/Movies";
 const Home = () => {
   const [search, setSearch] = useState("");
+  const[searchList,setSearchList]=useState<MovieDataType[]>([]);
+  const {state}=useContext(MovieContext);
+  const {movies}=state;
+  console.log(state);
+  const trendingList=movies.filter((item)=>item.isTrending===true);
+  const recommendList=movies.filter((item)=>item.isTrending!==true);
+
   const handleSearch = (e: { target: { value: SetStateAction<string> } }) => {
     setSearch(e.target.value);
+    const newList=movies.filter((movie)=>movie.title.toLowerCase().includes(search.toLowerCase()))
+    setSearchList(newList);
   };
+
   return (
     <Layouts>
       <Box>
