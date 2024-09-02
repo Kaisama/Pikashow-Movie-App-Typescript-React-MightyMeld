@@ -11,6 +11,7 @@ const TvSeries = () => {
   const[searchList,setSearchList]=useState<MovieDataType[]>([]);
   const {state}=useContext(MovieContext);
   const {movies}=state;
+  const tvSeries= movies.filter((movie)=>movie.category==='TV Series')
   
 
   const handleSearch = (e: { target: { value: SetStateAction<string> } }) => {
@@ -52,7 +53,7 @@ const TvSeries = () => {
                     <Typography variant="h5" component='h1' my={6} fontWeight={400}>
                       Tv Series
                     </Typography>
-                    <MovieTrendingList trendingList={search === ""? movies: searchList}/> 
+                    <MovieTrendingList trendingList={search === ""? tvSeries: searchList}/> 
             </Box>
           ):(
             <Box width='100%'>
