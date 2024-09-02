@@ -74,6 +74,28 @@ const MovieCard = ({ movie }: MovieCardProps) => {
             <Typography color="#e0e0e0" padding={1} aria-label="movie title">
               {movie.title}
             </Typography>
+            <Box style={{
+           position:"absolute",
+           top:'0',
+           left:'0',
+           right:'0',
+           display:"flex",
+           justifyContent:"flex-end",
+           padding:"16px"
+        }}
+      >
+        <Box sx={{
+          p:'1rem',
+          backgroundColor:'black',
+          borderRadius:"100%",
+          cursor:'pointer',
+          "&:hover":{opacity:0.8}
+        }}
+        onClick={()=>handleToggleBookmark(movie.id)}
+        >
+          {movie.isBookmarked?(<BookmarkIcon fill={"#E0E0E0"}/>):(<BookmarkEmptyIcon/>)}
+        </Box>
+      </Box>
 
         </Grid>
         </Grid>
